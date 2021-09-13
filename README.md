@@ -5,15 +5,12 @@
 
 ### Environment Setup:
 3. Open Cloud shell: https://shell.cloud.google.com/
-4. Create *sysadm01* project: `gcloud projects create sysadm01`
+4. Create *sysadm01* project: `gcloud projects create syseng01-$(echo $((10000 + $RANDOM % 99999)))`
 5. Run `gcloud projects list` find new project and copy project ID (It might be different than name)
-6. Switch to *sysadm01* project: `gcloud config set project sysadm01`
+6. Switch to *sysadm01* project: `gcloud config set project $(gcloud projects list |grep 'syseng01-'|awk '{print $1}')`
 7. Set Default zone: `gcloud config set compute/zone us-central1-a`
 8. Run `gcloud alpha billing accounts list` to see billing_account_id
-9. Run `gcloud alpha billing accounts projects link sysadm01 --account-id <billing_account_id>` to enable billing on the new project
-- ALTERNATIVE:
-    - run `gcloud alpha billing accounts list --format="json"|jq -r '.[].name'|awk -F'/' '{print $2}'` to find Billing Account ID
-    - Combine 2 commands together to make command dynamic:
+9. Run `gcloud alpha billing accounts projects link $(gcloud projects list |grep 'syseng01-'|awk '{print $1}') --account-id $(gcloud beta billing accounts list --format="value(name)")` to enable billing on the new project
     ```
     gcloud alpha billing accounts projects link sysadm01 --account-id `gcloud alpha billing accounts list --format="json"|jq -r '.[].name'|awk -F'/' '{print $2}'`
     ```
