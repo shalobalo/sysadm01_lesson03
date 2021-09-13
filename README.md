@@ -5,15 +5,15 @@
 
 ### Environment Setup:
 3. Open Cloud shell: https://shell.cloud.google.com/
-4. Create *sysadm01* project: `gcloud projects create syseng01-$(echo $((10000 + $RANDOM % 99999)))`
+4. Create *syseng01-* project: `gcloud projects create syseng01-$(echo $((10000 + $RANDOM % 99999)))`
 5. Run `gcloud projects list` find new project and copy project ID (It might be different than name)
-6. Switch to *sysadm01* project: `gcloud config set project $(gcloud projects list |grep 'syseng01-'|awk '{print $1}')`
+6. Switch to *sysaeng01-* project: `gcloud config set project $(gcloud projects list |grep 'syseng01-'|awk '{print $1}')`
 7. Set Default zone: `gcloud config set compute/zone us-central1-a`
 8. Run `gcloud alpha billing accounts list` to see billing_account_id
-9. Run `gcloud alpha billing accounts projects link $(gcloud projects list |grep 'syseng01-'|awk '{print $1}') --account-id $(gcloud beta billing accounts list --format="value(name)")` to enable billing on the new project
-    ```
-    gcloud alpha billing accounts projects link sysadm01 --account-id `gcloud alpha billing accounts list --format="json"|jq -r '.[].name'|awk -F'/' '{print $2}'`
-    ```
+9. To enable billing on the new project run: 
+```
+gcloud alpha billing accounts projects link $(gcloud projects list |grep 'syseng01-'|awk '{print $1}') --account-id $(gcloud beta billing accounts list --format="value(name)")
+```
 10. Enable Compute API
   - Run `gcloud services enable compute.googleapis.com` to enable compute API. (it may take few minutes to complete)
 11. Create and upload ssh keys
@@ -30,6 +30,10 @@
   - To get remote shell to the Instance run:
 ```
 ssh `gcloud compute instances list --format="json"|jq -r '.[].networkInterfaces[].accessConfigs[] | select(.name == "external-nat").natIP' 2>/dev/null`
+```
+or
+```
+gcloud compute instances list | awk '/lesson02-jumphost/{print $5}' | xargs ssh -tt
 ```
   - OPTIONAL: change jq parameters to search public ip by instance name
 13. List of all files in current directory
