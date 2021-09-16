@@ -15,19 +15,17 @@
 gcloud alpha billing accounts projects link $(gcloud projects list --format="json"|jq -r '.[] | select(.name | contains("syseng01-")) | .name') --account-id $(gcloud beta billing accounts list --format="value(name)")
 ```
 10. Enable Compute API
-  - Run `gcloud services enable compute.googleapis.com` to enable compute API. (it may take few minutes to complete)
+  a. Run `gcloud services enable compute.googleapis.com` to enable compute API. (it may take few minutes to complete)
 11. Create and upload ssh keys
-11.1 Run `ssh-keygen -b 4096` and keep passphrase empty
-11.2 Use *nano* or *vi* to edit `~/.ssh/id_rsa.pub` file and change format to:
-```
-[username]:ssh-rsa [EXISTING_KEY_VALUE_2] [username]
-```
-11.3 Run `gcloud compute project-info add-metadata --metadata-from-file ssh-keys="$HOME/.ssh/id_rsa.pub"` to add public key to GCP platform
+	a. Run `ssh-keygen -b 4096` and keep passphrase empty
+	b. Use *nano* or *vi* to edit `~/.ssh/id_rsa.pub` file and change format to:
+`[username]:ssh-rsa [EXISTING_KEY_VALUE_2] [username]`
+	c. Run `gcloud compute project-info add-metadata --metadata-from-file ssh-keys="$HOME/.ssh/id_rsa.pub"` to add public key to GCP platform
 
 ### Practice on Jumphost:
 12. Create Jump Instance and get remote shell
-12.1 Run `gcloud compute instances create lesson02-jumphost` to create new instance
-12.2 To get remote shell to the Instance run:
+a.	 Run `gcloud compute instances create lesson02-jumphost` to create new instance
+b. To get remote shell to the Instance run:
 ```
 gcloud compute instances list --format=json|jq -r '.[] | select(.name == "lesson02-jumphost").networkInterfaces[].accessConfigs[].natIP' |xargs ssh -tt
 ```
@@ -47,22 +45,18 @@ gcloud compute instances list --format=json|jq -r '.[] | select(.name == "lesson
 
 ### Practice on Secured host:
 18. Create secured instance and get shell access to it
-  18.1 Run `gcloud compute instances create lesson02-securehost --no-address` to create secured instance
-  18.2 Start ssh-agent on cloud shell instance:
-```
-eval `ssh-agent -s`
-```
-  18.3 Add private key to agent `ssh-add ~/.ssh/id_rsa`
-  18.4 To connect to instance remote shell run: 
-```
-ssh -A `gcloud compute instances list --format="json"|jq -r '.[].networkInterfaces[].accessConfigs[] | select(.name == "external-nat").natIP' 2>/dev/null`
-```
-  18.4 Get remote shell to secured instance: `ssh lesson02-securehost`
-  18.5 Run `hostname` to make sure you are on the secured host.
+  a. Run `gcloud compute instances create lesson02-securehost --no-address` to create secured instance
+  b. Start ssh-agent on cloud shell instance: `eval $(ssh-agent -s)`
+  c. Add private key to agent `ssh-add ~/.ssh/id_rsa`
+  d. To connect to instance remote shell run: 
+`gcloud compute instances list --format=json|jq -r '.[] | select(.name == "lesson02-jumphost").networkInterfaces[].accessConfigs[].natIP' |xargs ssh -tt -A`
+
+	e.  Get remote shell to secured instance: `ssh lesson02-securehost`
+	f. Run `hostname` to make sure you are on the secured host.
 19. Check Billing details and find running virtual machine
-  19.1 Go to Billing page: [https://console.cloud.google.com/billing](https://console.cloud.google.com/billing)
-  19.2 Check billing expenses
-20. Terminate VMs
-  20.1 Run `gcloud compute instances delete lesson02-jumphost` to delete instance
-  20.2 Run `gcloud compute instances delete lesson02-securehost` to delete instance
-  20.3 Run `gcloud compute instances list` to make sure you have no running instances
+	a.  Go to Billing page: [https://console.cloud.google.com/billing](https://console.cloud.google.com/billing)
+    b. Check billing expenses
+21. Terminate VMs
+  a. Run `gcloud compute instances delete lesson02-jumphost` to delete instance
+  b. Run `gcloud compute instances delete lesson02-securehost` to delete instance
+  c. Run `gcloud compute instances list` to make sure you have no running instances
