@@ -15,12 +15,12 @@
 gcloud alpha billing accounts projects link $(gcloud projects list --format="json"|jq -r '.[] | select(.name | contains("syseng01-")) | .name') --account-id $(gcloud beta billing accounts list --format="value(name)")
 ```
 10. Enable Compute API
-	 a. Run `gcloud services enable compute.googleapis.com` to enable compute API. (it may take few minutes to complete)
+	- Run `gcloud services enable compute.googleapis.com` to enable compute API. (it may take few minutes to complete)
 11. Create and upload ssh keys
-	a. Run `ssh-keygen -b 4096` and keep passphrase empty
-	b. Use *nano* or *vi* to edit `~/.ssh/id_rsa.pub` file and change format to:
+	- Run `ssh-keygen -b 4096` and keep passphrase empty
+	- Use *nano* or *vi* to edit `~/.ssh/id_rsa.pub` file and change format to:
 `[username]:ssh-rsa [EXISTING_KEY_VALUE_2] [username]`
-	c. Run `gcloud compute project-info add-metadata --metadata-from-file ssh-keys="$HOME/.ssh/id_rsa.pub"` to add public key to GCP platform
+	- Run `gcloud compute project-info add-metadata --metadata-from-file ssh-keys="$HOME/.ssh/id_rsa.pub"` to add public key to GCP platform
 
 ### Practice on Jumphost:
 12. Create Jump Instance and get remote shell
