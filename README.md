@@ -61,12 +61,13 @@ gcloud compute instances list --format=json|jq -r '.[] | select(.name == "lesson
 
 	- Get remote shell to secured instance: `ssh lesson02-securehost`
 	- Run `hostname` to make sure you are on the secured host.
-19. Check Billing details and find running virtual machine
-	- Go to Billing page: [https://console.cloud.google.com/billing](https://console.cloud.google.com/billing)
-	- Check billing expenses
 
 	> ATTENTION!
 	> IT'S TIME TO TAKE A SCREENSHOT:  Make sure the screenshot contains google cloud shell log with ssh session to 'lesson02-securehost'
+
+19. Check Billing details and find running virtual machine
+	- Go to Billing page: [https://console.cloud.google.com/billing](https://console.cloud.google.com/billing)
+	- Check billing expenses
 
 21. Terminate VMs
 	- Run `gcloud compute instances delete lesson02-jumphost` to delete instance
