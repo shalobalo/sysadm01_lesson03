@@ -22,8 +22,9 @@ gcloud alpha billing accounts projects link $(gcloud projects list --format="jso
 `[username]:ssh-rsa [EXISTING_KEY_VALUE_2] [username]`
 	- Run `gcloud compute project-info add-metadata --metadata-from-file ssh-keys="$HOME/.ssh/id_rsa.pub"` to add public key to GCP platform
 	- `cat $HOME/.ssh/id_rsa.pub`
-	
-	> IT'S TIME FOR A SCREENSHOT: Take screenshot that will show your google cloud shell log.
+
+	> ATTENTION!
+	> *IT'S TIME FOR A SCREENSHOT*: Take screenshot that will show your google cloud shell log.
 	
 ### Practice on Jumphost:
 12. Create Jump Instance and get remote shell
@@ -46,7 +47,8 @@ gcloud compute instances list --format=json|jq -r '.[] | select(.name == "lesson
 17. Find process id of the sleep
   - Run `ps aux|grep sleep` to see process parameters
 
-	> IT'S TIME FOR A SCREENSHOT: Take screenshot that will show your google cloud shell log 
+	> ATTENTION!
+	> *IT'S TIME FOR A SCREENSHOT*: Take screenshot that will show your google cloud shell log 
 
 ### Practice on Secured host:
 18. Create secured instance and get shell access to it
@@ -61,8 +63,9 @@ gcloud compute instances list --format=json|jq -r '.[] | select(.name == "lesson
 19. Check Billing details and find running virtual machine
 	- Go to Billing page: [https://console.cloud.google.com/billing](https://console.cloud.google.com/billing)
 	- Check billing expenses
-
-	> IT'S TIME FOR A SCREENSHOT: Take one more screenshot that will show your google cloud shell log with ssh session to 'lesson02-securehost'
+	
+	> ATTENTION!
+	> *IT'S TIME FOR A SCREENSHOT*: Take one more screenshot that will show your google cloud shell log with ssh session to 'lesson02-securehost'
 
 21. Terminate VMs
 	- Run `gcloud compute instances delete lesson02-jumphost` to delete instance
