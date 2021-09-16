@@ -5,14 +5,14 @@
 
 ### Environment Setup:
 3. Open Cloud shell: https://shell.cloud.google.com/
-4. Create *syseng01-* project: `gcloud projects create syseng01-$(echo $((10000 + $RANDOM % 99999)))`
+4. Create *syseng01-* project: `if gcloud projects list --format="json"|jq -r '.[].name'|grep -q "syseng01-" ;then echo "Project exists!"; else gcloud projects create syseng01-$(echo $((10000 + $RANDOM % 99999)));fi`
 5. Run `gcloud projects list` find new project and copy project ID (It might be different than name)
-6. Switch to *sysaeng01-* project: `gcloud config set project $(gcloud projects list |grep 'syseng01-'|awk '{print $1}')`
+6. Switch to *sysaeng01-* project: `gcloud config set project $(gcloud projects list --format="json"|jq -r '.[] | select(.name | contains("syseng01-")) | .name')`
 7. Set Default zone: `gcloud config set compute/zone us-central1-a`
 8. Run `gcloud alpha billing accounts list` to see billing_account_id
 9. To enable billing on the new project run: 
 ```
-gcloud alpha billing accounts projects link $(gcloud projects list |grep 'syseng01-'|awk '{print $1}') --account-id $(gcloud beta billing accounts list --format="value(name)")
+gcloud alpha billing accounts projects link $(gcloud projects list --format="json"|jq -r '.[] | select(.name | contains("syseng01-")) | .name') --account-id $(gcloud beta billing accounts list --format="value(name)")
 ```
 10. Enable Compute API
   - Run `gcloud services enable compute.googleapis.com` to enable compute API. (it may take few minutes to complete)
