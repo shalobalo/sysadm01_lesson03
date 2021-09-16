@@ -1,3 +1,4 @@
+
 # Lesson 2. Home Work. Practice
 ### GCP Account Setup:
 1. Create a Gmail account if you don’t have one: https://accounts.google.com/signup
@@ -24,8 +25,8 @@ gcloud alpha billing accounts projects link $(gcloud projects list --format="jso
 	- `cat $HOME/.ssh/id_rsa.pub`
 
 	> ATTENTION!
-	> *IT'S TIME FOR A SCREENSHOT*: Take screenshot that will show your google cloud shell log.
-	
+	> IT'S TIME TO TAKE A SCREENSHOT:  Make sure the screenshot contains google cloud shell log 
+
 ### Practice on Jumphost:
 12. Create Jump Instance and get remote shell
 	- Run `gcloud compute instances create lesson02-jumphost` to create new instance
@@ -48,7 +49,7 @@ gcloud compute instances list --format=json|jq -r '.[] | select(.name == "lesson
   - Run `ps aux|grep sleep` to see process parameters
 
 	> ATTENTION!
-	> *IT'S TIME FOR A SCREENSHOT*: Take screenshot that will show your google cloud shell log 
+	> IT'S TIME TO TAKE A SCREENSHOT:  Make sure the screenshot contains google cloud shell log 
 
 ### Practice on Secured host:
 18. Create secured instance and get shell access to it
@@ -63,9 +64,9 @@ gcloud compute instances list --format=json|jq -r '.[] | select(.name == "lesson
 19. Check Billing details and find running virtual machine
 	- Go to Billing page: [https://console.cloud.google.com/billing](https://console.cloud.google.com/billing)
 	- Check billing expenses
-	
+
 	> ATTENTION!
-	> *IT'S TIME FOR A SCREENSHOT*: Take one more screenshot that will show your google cloud shell log with ssh session to 'lesson02-securehost'
+	> IT'S TIME TO TAKE A SCREENSHOT:  Make sure the screenshot contains google cloud shell log with ssh session to 'lesson02-securehost'
 
 21. Terminate VMs
 	- Run `gcloud compute instances delete lesson02-jumphost` to delete instance
