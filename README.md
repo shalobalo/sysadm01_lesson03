@@ -33,8 +33,10 @@ ssh `gcloud compute instances list --format="json"|jq -r '.[].networkInterfaces[
 ```
 or
 ```
-gcloud compute instances list | awk '/lesson02-jumphost/{print $5}' | xargs ssh -tt
+gcloud compute instances list --format=json|jq -r '.[] | select(.name == "lesson02-jumphost").networkInterfaces[].accessConfigs[].natIP' |xargs ssh -tt
 ```
+  > NOTE: Please add `-l <username>` at the end of previous command to use username other than in cloud shell
+    Example: `gcloud compute instances list --format=json|jq -r '.[] | select(.name == "lesson02-jumphost").networkInterfaces[].accessConfigs[].natIP' |xargs ssh -tt -l andy_01`
   - OPTIONAL: change jq parameters to search public ip by instance name
 13. List of all files in current directory
   - Run `ls -la` to see all files in current directory
