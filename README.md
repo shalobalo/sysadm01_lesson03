@@ -32,10 +32,10 @@ gcloud alpha billing accounts projects link $(gcloud projects list --format="jso
 	- Run `gcloud compute instances create lesson02-jumphost` to create new instance
  	- To get remote shell to the Instance run:
 ```
-gcloud compute instances list --format=json|jq -r '.[] | select(.name == "lesson02-jumphost").networkInterfaces[].accessConfigs[].natIP' |xargs ssh -tt
+ssh -A $(gcloud compute instances describe lesson02-jumphost --format='get(networkInterfaces[0].accessConfigs[0].natIP)')
 ```
   > NOTE: Please add `-l <username>` at the end of previous command to use username other than in cloud shell
-  > Example: `gcloud compute instances list --format=json|jq -r '.[] | select(.name == "lesson02-jumphost").networkInterfaces[].accessConfigs[].natIP' |xargs ssh -tt -l andy_01`
+  > Example: `ssh -A -l <username> $(gcloud compute instances describe lesson02-jumphost --format='get(networkInterfaces[0].accessConfigs[0].natIP)')`
 
 13. List of all files in current directory
   - Run `ls -la` to see all files in current directory
@@ -57,7 +57,7 @@ gcloud compute instances list --format=json|jq -r '.[] | select(.name == "lesson
 	- Start ssh-agent on cloud shell instance: `eval $(ssh-agent -s)`
 	- Add private key to agent `ssh-add ~/.ssh/id_rsa`
 	- To connect to instance remote shell run: 
-`gcloud compute instances list --format=json|jq -r '.[] | select(.name == "lesson02-jumphost").networkInterfaces[].accessConfigs[].natIP' |xargs ssh -tt -A`
+`ssh -A $(gcloud compute instances describe lesson02-jumphost --format='get(networkInterfaces[0].accessConfigs[0].natIP)')`
 
 	- Get remote shell to secured instance: `ssh lesson02-securehost`
 	- Run `hostname` to make sure you are on the secured host.
