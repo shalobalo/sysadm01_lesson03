@@ -77,11 +77,12 @@ gcloud alpha billing accounts projects link $(gcloud projects list --format="jso
 	- Run `hostname` to make sure you are on the secured host.
 	- Run `exit` to close `lesson02-securehost`
 	- Run `exit` to close `lesson02-jumphost`
+	> ATTENTION!
+	> IT'S TIME TO TAKE A SCREENSHOT:  Make sure the screenshot contains at least 10 lines od google cloud shell log with ssh session to 'lesson02-securehost'
+
 	- Make sure you get back to cloudshell instance and your prompt line looks like this: `andy@cloudshell:~ (syseng01-10246)`
 	- Run `gcloud compute instanes list`
 
-	> ATTENTION!
-	> IT'S TIME TO TAKE A SCREENSHOT:  Make sure the screenshot contains google cloud shell log with ssh session to 'lesson02-securehost'
 
 19. Check Billing details and find running virtual machine
 	- Go to Billing page: [https://console.cloud.google.com/billing](https://console.cloud.google.com/billing)
