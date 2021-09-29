@@ -20,10 +20,10 @@ gcloud alpha billing accounts projects link $(gcloud projects list --format="jso
 11. Create and upload ssh keys
 	- Run `ssh-keygen -b 4096` keep path to key file default example:`/home/andy/.ssh/id_rsa`, keep passphrase empty (press enter two times)
 	> NOTE: The public key has a SINGLE LINE with format `Type Base64key User@Host`
-	`Type` is usually `ssh-rsa` but could be `ssh-dsa`
-	`Base64key` is a line with ASCI characters WITHOUT SPACES
-	`User` Active User at the moment key created
-	`Host` Hostname where the key created
+	- `Type` is usually `ssh-rsa` but could be `ssh-dsa`
+	- `Base64key` is a line with ASCI characters WITHOUT SPACES
+	- `User` Active User at the moment key created
+	- `Host` Hostname where the key created
 
 	- Run command `echo $USER` to see system username
 	> Example: 
