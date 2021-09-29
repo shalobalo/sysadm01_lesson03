@@ -6,13 +6,10 @@
 
 ### Environment Setup:
 3. Open Cloud shell: https://shell.cloud.google.com/
-4. Create *syseng01-* project: 
-```
-if gcloud projects list --format="json"|jq -r '.[].name'|grep -q "syseng01-" ;then echo "Project exists!"; else gcloud projects create syseng01-$(echo $((10000 + $RANDOM % 99999)));fi
-```
+4. Create **syseng01-** project: `if gcloud projects list --format="json"|jq -r '.[].name'|grep -q "syseng01-" ;then echo "Project exists!"; else gcloud projects create syseng01-$(echo $((10000 + $RANDOM % 99999)));fi`
 5. Run `gcloud projects list` to see list of available projects. Make sure you have only one project that name fits in to `syseng01-*` format.
 6. Switch to *sysaeng01-* project using command: `gcloud config set project $(gcloud projects list --format="json"|jq -r '.[] | select(.name | contains("syseng01-")) | .name')`
-	> NOTE: After step 7 your prompt line should looks like: `andy@cloudshell:~ (syseng01-10246)`. Repeat previous steps if you see something other than `syseng01-` in that line.
+	> NOTE: After step 6 your prompt line should looks like: `andy@cloudshell:~ (syseng01-10246)`. Repeat previous steps if you see something other than `syseng01-` in that line.
 7. Set Default zone: `gcloud config set compute/zone us-central1-a`
 
 	> IMPORTANT! If you have GCP web page reloaded or shell console reset you have to repeat steps 6 and 7
@@ -25,14 +22,16 @@ gcloud alpha billing accounts projects link $(gcloud projects list --format="jso
 10. Enable Compute API
 	- Run `gcloud services enable compute.googleapis.com` to enable compute API. (it may take few minutes to complete)
 11. Create and upload ssh keys
-	- Run `ssh-keygen -b 4096 -t rsa -f "$HOME/.ssh/id_rsa1" -C "$USER" -q -N "" <<< y` to generate SSH Key pair.
-	> NOTE: Do not share you private key file `$HOME/.ssh/id_rsa`. Keep it secret like a password.
+	- Run `ssh-keygen -b 4096 -t rsa -f "$HOME/.ssh/id_rsa1" -C "$USER" -q -N "" <<< y` to generate SSH Key pair
+	
+	> NOTE: Do not share you private key file `$HOME/.ssh/id_rsa`. Keep it secret like a password
+	
 	- Public part of the key is generated and saved along with private and has **.pub** extention: `$HOME/.ssh/id_rsa.pub`
-	- Run `cat ~/.ssh/id_rsa.pub` to see public key file.
+	- Run `cat ~/.ssh/id_rsa.pub` to see public key file
 	
 	> Example: `ssh-rsa AAAAB3Nza...l0MWKZfQ== andy`
 	
-	> Public key has SINGLE LINE with format `<algorithm> <key> <comment>`
+	> Public key has SINGLE LINE with format: `<algorithm> <key> <comment>`
 
 	> **algorithm**: [SSH key format](https://en.wikipedia.org/wiki/Ssh-keygen#Key_formats_supported)
 
@@ -40,10 +39,12 @@ gcloud alpha billing accounts projects link $(gcloud projects list --format="jso
 	
 	> **comment**: Usually is Active User at the moment key being created `@` Hostname where the key being created
 
-	- GCP is supporting only specific format of public key: ** username:ssh-rsa AAAAB3NzaC1yc2...uLM0zbQ== username**
-	- Run `sed '1s/^/'"$USER:"'/' $HOME/.ssh/id_rsa.pub > $HOME/.ssh/id_rsa.google_pub` to create version for google.
+	- GCP is supporting only specific format of public key: `username:ssh-rsa AAAAB3NzaC1yc2...uLM0zbQ== username`
+	- Run `sed '1s/^/'"$USER:"'/' $HOME/.ssh/id_rsa.pub > $HOME/.ssh/id_rsa.google_pub` to create version of public key file for google.
 	- Make sure the key is have proper format now: `cat $HOME/.ssh/id_rsa.google_pub`
+	
 	> Example: `andy:ssh-rsa AAAAB3Nza...l0MWKZfQ== andy`
+	
 	- Run `gcloud compute project-info add-metadata --metadata-from-file ssh-keys="$HOME/.ssh/id_rsa.google_pub"` to add public key to GCP platform
 
 	> IT'S TIME TO TAKE A SCREENSHOT: Make sure the screenshot contains google cloud shell log 
@@ -67,8 +68,8 @@ gcloud alpha billing accounts projects link $(gcloud projects list --format="jso
 17. Find process id of the sleep
   - Run `ps aux|grep sleep` to see process parameters
 
-	> ATTENTION!
-	> IT'S TIME TO TAKE A SCREENSHOT:  Make sure the screenshot contains at least 10 lines of google cloud shell log 
+	> IT'S TIME TO TAKE A SCREENSHOT:  Make sure the screenshot contains at least 10 lines of google cloud shell log
+
   - Run `exit` to close connection with `lesson02-jumphost`
   - Make sure you get back to cloudshell instance and your prompt line looks like this: `andy@cloudshell:~ (syseng01-10246)`
 
@@ -84,7 +85,7 @@ gcloud alpha billing accounts projects link $(gcloud projects list --format="jso
 	- Run `hostname` to make sure you are on the secured host.
 	- Run `exit` to close ssh session with `lesson02-securehost`
 	- Run `exit` to close ssh session with `lesson02-jumphost`
-	> ATTENTION!
+
 	> IT'S TIME TO TAKE A SCREENSHOT:  Make sure the screenshot contains at least 10 lines od google cloud shell log with ssh session to 'lesson02-securehost'
 
 	- Make sure you get back to cloudshell instance and your prompt line looks like this: `andy@cloudshell:~ (syseng01-10246)`
