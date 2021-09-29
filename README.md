@@ -36,7 +36,7 @@ gcloud alpha billing accounts projects link $(gcloud projects list --format="jso
 	% echo $USER
 	andy
 	```
-	- Use *nano* or *vi* to edit `~/.ssh/id_rsa.pub` file and change format to: `username:ssh-rsa [EXISTING_KEY_VALUE_] username`
+	- Edit the public key file uning command: `nano ~/.ssh/id_rsa.pub`. Change the file format to: `username:ssh-rsa [EXISTING_KEY_VALUE_] username`
 	> Note: you have to replace `user@host` at the end of the line with the username from previous step. 
 	> Remember key doens't contain any spaces and usually ends with one or two equal signs
 	> Example: 
