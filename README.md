@@ -35,7 +35,7 @@ gcloud alpha billing accounts projects link $(gcloud projects list --format="jso
 	```
 	> Public key has SINGLE LINE with format `Type Base64key User@Host`
 
-	> **Type**: is ssh usualkey type. There are many types but most common are `ssh-rsa` or `ssh-dsa`
+	> **Type**: SSH key type. There are many types but most common are `ssh-rsa` or `ssh-dsa`
 
 	> **Base64key**: is a line with ASCI characters WITHOUT SPACES
 	
