@@ -15,10 +15,7 @@
 	> IMPORTANT! If you have GCP web page reloaded or shell console reset you have to repeat steps 6 and 7
 
 8. Run `gcloud alpha billing accounts list` to see billing_account_id
-9. To enable billing on the new project run: 
-```
-gcloud alpha billing accounts projects link $(gcloud projects list --format="json"|jq -r '.[] | select(.name | contains("syseng01-")) | .name') --account-id $(gcloud beta billing accounts list --format="value(name)")
-```
+9. To enable billing on the new project run: `gcloud alpha billing accounts projects link $(gcloud projects list --format="json"|jq -r '.[] | select(.name | contains("syseng01-")) | .name') --account-id $(gcloud beta billing accounts list --format="value(name)")`
 10. Enable Compute API
 	- Run `gcloud services enable compute.googleapis.com` to enable compute API. (it may take few minutes to complete)
 11. Create and upload ssh keys
