@@ -7,7 +7,7 @@
 ### Environment Setup:
 3. Open Cloud shell: https://shell.cloud.google.com/
 4. Create *syseng01-* project: `if gcloud projects list --format="json"|jq -r '.[].name'|grep -q "syseng01-" ;then echo "Project exists!"; else gcloud projects create syseng01-$(echo $((10000 + $RANDOM % 99999)));fi`
-5. Run `gcloud projects list` find new project and copy project ID (It might be different than name)
+5. Run `gcloud projects list` find new project. Make sure you have only one project that name fits in to `syseng01-*` format.
 6. Switch to *sysaeng01-* project: `gcloud config set project $(gcloud projects list --format="json"|jq -r '.[] | select(.name | contains("syseng01-")) | .name')`
 7. Set Default zone: `gcloud config set compute/zone us-central1-a`
 8. Run `gcloud alpha billing accounts list` to see billing_account_id
@@ -18,7 +18,7 @@ gcloud alpha billing accounts projects link $(gcloud projects list --format="jso
 10. Enable Compute API
 	- Run `gcloud services enable compute.googleapis.com` to enable compute API. (it may take few minutes to complete)
 11. Create and upload ssh keys
-	- Run `ssh-keygen -b 4096` and keep passphrase empty
+	- Run `ssh-keygen -b 4096` keep path to key file default example:`/home/andy/.ssh/id_rsa`, keep passphrase empty (press enter two times)
 	- Use *nano* or *vi* to edit `~/.ssh/id_rsa.pub` file and change format to:
 `[username]:ssh-rsa [EXISTING_KEY_VALUE_2] [username]`
 	- Run `gcloud compute project-info add-metadata --metadata-from-file ssh-keys="$HOME/.ssh/id_rsa.pub"` to add public key to GCP platform
