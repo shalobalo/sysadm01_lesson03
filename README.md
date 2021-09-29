@@ -19,7 +19,7 @@
 10. Enable Compute API
 	- Run `gcloud services enable compute.googleapis.com` to enable compute API. (it may take few minutes to complete)
 11. Create and upload ssh keys
-	- Run `ssh-keygen -b 4096 -t rsa -f "$HOME/.ssh/id_rsa1" -C "$USER" -q -N "" <<< y` to generate SSH Key pair
+	- Run `ssh-keygen -b 4096 -t rsa -f "$HOME/.ssh/id_rsa" -C "$USER" -q -N "" <<< y` to generate SSH Key pair
 	
 	> NOTE: Do not share you private key file `$HOME/.ssh/id_rsa`. Keep it secret like a password
 	
