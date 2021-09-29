@@ -62,6 +62,8 @@ gcloud alpha billing accounts projects link $(gcloud projects list --format="jso
 
 	> ATTENTION!
 	> IT'S TIME TO TAKE A SCREENSHOT:  Make sure the screenshot contains google cloud shell log 
+  - Run `exit` to close connection with `lesson02-jumphost`
+  - Make sure you get back to cloudshell instance and your prompt line looks like this: `andy@cloudshell:~ (syseng01-10246)`
 
 ### Practice on Secured host:
 18. Create secured instance and get shell access to it
