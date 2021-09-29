@@ -25,38 +25,27 @@ gcloud alpha billing accounts projects link $(gcloud projects list --format="jso
 10. Enable Compute API
 	- Run `gcloud services enable compute.googleapis.com` to enable compute API. (it may take few minutes to complete)
 11. Create and upload ssh keys
-	- Run `ssh-keygen -b 4096` keep path to key file default example:`/home/andy/.ssh/id_rsa`, keep passphrase empty (press enter two times)
-	- Do not share you private `~/.ssh/id_rsa` file. It's secret, like a password.
-	- Public part of the key is generated and saved along with private and has .pub extention: `~/.ssh/id_rsa.pub`
-	- Run `cat ~/.ssh/id_rsa.pub` to see public file
+	- Run `ssh-keygen -b 4096 -t rsa -f "$HOME/.ssh/id_rsa1" -C "$USER" -q -N "" <<< y` to generate SSH Key pair.
+	> NOTE: Do not share you private key file `~/.ssh/id_rsa`. Keep it secret like a password.
+	- Public part of the key is generated and saved along with private and has **.pub** extention: `~/.ssh/id_rsa.pub`
+	- Run `cat ~/.ssh/id_rsa.pub` to see public key file
 	> Example:
 	```
-	ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDIpTEWgpgRUGV2MsY5njK5BdqZMDrLw1+bcfZuhoHitm5FA1gEN1CoIHmTRfIQGv2nVSaUL+9ZvYyuclVgWhkJ+uaOYjtHscz3ITwHoBuaxY5Yz3YhS4kBt8Ky2UwO8+yUTFo7jTVFCia/VR6v9C3YDmGDwMxhfKAZ4DDO6eCGiHdoOcH7TKT3YCvHX3C3aOC4hZuq7vsdLRZNhNw+0twULqiKUf7MVUcBd8MSkiln4oTcP3q4xaTIiKMBYr+KJ6A4KIx+DVYwbYMSlbCGX1y08XRwAJ1ZmxqsMFX1IGs/ueD3de1PyabjRhr+us1GXHNbQLQlk2Vn+iFjR7btL0K8kwbiuM/IVbeY2odam9XHbhLqY/4J2HXhujwT0lJ3LUGCjTR8XeP3XA7hndIr9T9v+rOZMMDKllCtAK3goSq5EEJZgeN+YbtAhSpyPgMlHFUiYWonUAJWzQJkjfsgYh2y6t9eSRZ1fvqhopsHj/pBF8UnW8S0xSC0lWkVWV83YKe7E7T9oHfqTBhMEas++bcXaePqmGd7+fD5S4CojZ+gV9Hqt4RzQUPTZWC8SDyGXjL9AP+XS7QR320zYRMVx4iIiSndKY5O7XM/9ObqlV0RkT4yFwMjUmEE9NUqHNJn2WhBEe0F23KfRkOFEmcVICKfgLrwEBtpwci8EOyuLM0zbQ== andy@cs-1048400762727-default-boost-99946
+	ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCu7kGuW5I5vbWTAuGI6V9uFlZ164yECf6XUXCoNE8kSvIKSMwhut6l+2UZFf6pAftz7iSPrZUXjTWr27ksraW+2bqn5u8PMHAyYFiPxr0WbOn/c1oEyhRuS+090VPfIGq5dz19CRxn2A+zXCZhfwDWT71PzuWqwI6VfaRBIlLietJSa9Pfd80jZziBPQKd4U6Oz5zHyX/9QHiGsgalrZXvazE3LD9Cc+jhXlf65RsQZ/mg7GKS4NAM+zz8ymgF8epmNhwgw0U68yH4O4bhih3kHBd7eRgRqbAWQbh2hXvkhrdANPcuQDH3rz1j2e+uoJ6w48RKpq4hB5vqw+Pcn/bDpc5m4ESU5j1fsYhzFQv+9aLznhUg3lLjPV1Fq7DK24JclJk6YGoPUGDcihW+19De5PkpVncOY8w/mkchzweEiw/sQpQF8nNvG9FpbG1n+9OxhipiiW2wCOHaHLREoBctx01A7Cq/0fTFFrqDn871qBXoEjS/qP7NlXtvLBcn3VJEQw1kBYn0WRsrIb2HwLKDbzMFvH3OZoM/U66s5h6YnNZoYjs1IDcaf0B/PdZsqVtDtME3ZkqMcX72/rDqH+O8xWe/K0EBOJ/DzMRfALRePnkvLUlp8J9IU+v6D3/ExJaCMKOTLj7hf+CASclRc0VOB2P9lL6vmQyE1rl0MWKZfQ== andy
 	```
+	> Public key has SINGLE LINE with format `Type Base64key User@Host`
+	> **Type**: is ssh usualkey type. There are many types but most common are `ssh-rsa` or `ssh-dsa`
+	> **Base64key**: is a line with ASCI characters WITHOUT SPACES
+	> **User**: Active User at the moment key created
+	> **Host**: Hostname where the key created
 
-	> NOTE: The public key has SINGLE LINE with format `Type Base64key User@Host`
-	- **Type**: is ssh usualkey type. There are many types but most common are `ssh-rsa` or `ssh-dsa`
-	- **Base64key**: is a line with ASCI characters WITHOUT SPACES
-	- **User**: Active User at the moment key created
-	- **Host**: Hostname where the key created
-
-	- Run command `echo $USER` to see system username
-	> Example: 
-	```
-	% echo $USER
-	andy
-	```
-	- Edit the public key file uning command: `nano ~/.ssh/id_rsa.pub`. Change the file format to:
-	```
-	username:ssh-rsa [EXISTING_KEY_VALUE] username
-	```
-	> Note: you have to replace `user@host` at the end of the line with the username from previous step. 
-	> Remember key doens't contain any spaces and usually ends with one or two equal signs
+	- Gcloud is support only specific format of public key: **username:ssh-rsa [EXISTING_KEY_VALUE] username**
+	- Run `sed -i '1s/^/'"$USER:"'/' ~/.ssh/id_rsa1.pub` to convert public key to the format.
+	- Make sure the key is have proper format now: `cat $HOME/.ssh/id_rsa.pub`
 	> Example: 
 	`
 	andy:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDIpTEWgpgRUGV2MsY5njK5BdqZMDrLw1+bcfZuhoHitm5FA1gEN1CoIHmTRfIQGv2nVSaUL+9ZvYyuclVgWhkJ+uaOYjtHscz3ITwHoBuaxY5Yz3YhS4kBt8Ky2UwO8+yUTFo7jTVFCia/VR6v9C3YDmGDwMxhfKAZ4DDO6eCGiHdoOcH7TKT3YCvHX3C3aOC4hZuq7vsdLRZNhNw+0twULqiKUf7MVUcBd8MSkiln4oTcP3q4xaTIiKMBYr+KJ6A4KIx+DVYwbYMSlbCGX1y08XRwAJ1ZmxqsMFX1IGs/ueD3de1PyabjRhr+us1GXHNbQLQlk2Vn+iFjR7btL0K8kwbiuM/IVbeY2odam9XHbhLqY/4J2HXhujwT0lJ3LUGCjTR8XeP3XA7hndIr9T9v+rOZMMDKllCtAK3goSq5EEJZgeN+YbtAhSpyPgMlHFUiYWonUAJWzQJkjfsgYh2y6t9eSRZ1fvqhopsHj/pBF8UnW8S0xSC0lWkVWV83YKe7E7T9oHfqTBhMEas++bcXaePqmGd7+fD5S4CojZ+gV9Hqt4RzQUPTZWC8SDyGXjL9AP+XS7QR320zYRMVx4iIiSndKY5O7XM/9ObqlV0RkT4yFwMjUmEE9NUqHNJn2WhBEe0F23KfRkOFEmcVICKfgLrwEBtpwci8EOyuLM0zbQ== andy
 	`
-	- Make sure the key is have proper format now: `cat $HOME/.ssh/id_rsa.pub`
 	- Run `gcloud compute project-info add-metadata --metadata-from-file ssh-keys="$HOME/.ssh/id_rsa.pub"` to add public key to GCP platform
 	> ATTENTION!
 	> IT'S TIME TO TAKE A SCREENSHOT:  Make sure the screenshot contains google cloud shell log 
