@@ -19,8 +19,14 @@ gcloud alpha billing accounts projects link $(gcloud projects list --format="jso
 	- Run `gcloud services enable compute.googleapis.com` to enable compute API. (it may take few minutes to complete)
 11. Create and upload ssh keys
 	- Run `ssh-keygen -b 4096` keep path to key file default example:`/home/andy/.ssh/id_rsa`, keep passphrase empty (press enter two times)
-	- Use *nano* or *vi* to edit `~/.ssh/id_rsa.pub` file and change format to:
-`[username]:ssh-rsa [EXISTING_KEY_VALUE_2] [username]`
+	- Run command `echo $USER` to see system username
+	> Example: 
+	```
+	% echo $USER
+	andy
+	```
+	- Use *nano* or *vi* to edit `~/.ssh/id_rsa.pub` file and change format to: `username:ssh-rsa [EXISTING_KEY_VALUE_2] username`
+	> Example: `andy:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC+pUaWa/4wcsS5fmaYB0QNPB0mHpxVPioUtpWGaKko1ajZ76Cji+xFIcXofxsdTxFuczH188SYCDQsmZTtygDK4yQS0fsxQ336uFkMPgt7XYy66Hw+ZB+2liSV8NWq0fXObTMWyb0/l29Oilbw7bQtPtagAqrWWgigwgv1qOKKEAQx8R7Eluynid5QX+M1bBv53tlsbOwEXluPJ4Uhq1g7Rh3OTo2pVdcmnbYMZ+hio8q5W9MFC6VyHoOq7ZbCkzgIztmKhTcBYOlsOKYCzI2xF2vmf0Qx9MqxeyDG8QmyiW0nXXO80Xgmu96eYzsGDdSK2ORiGT8ikO1XZmBv5b+x andy`
 	- Run `gcloud compute project-info add-metadata --metadata-from-file ssh-keys="$HOME/.ssh/id_rsa.pub"` to add public key to GCP platform
 	- `cat $HOME/.ssh/id_rsa.pub`
 
