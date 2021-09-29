@@ -81,7 +81,7 @@ gcloud alpha billing accounts projects link $(gcloud projects list --format="jso
 	> IT'S TIME TO TAKE A SCREENSHOT:  Make sure the screenshot contains at least 10 lines od google cloud shell log with ssh session to 'lesson02-securehost'
 
 	- Make sure you get back to cloudshell instance and your prompt line looks like this: `andy@cloudshell:~ (syseng01-10246)`
-	- Run `gcloud compute instanes list`
+	- Run `gcloud compute instances list`
 
 
 19. Check Billing details and find running virtual machine
