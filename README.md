@@ -89,6 +89,6 @@ gcloud alpha billing accounts projects link $(gcloud projects list --format="jso
 	- Check billing expenses
 
 21. Terminate VMs
-	- Run `gcloud compute instances delete lesson02-jumphost` to delete instance
-	- Run `gcloud compute instances delete lesson02-securehost` to delete instance
+	- Run `gcloud compute instances delete lesson02-jumphost -q` to delete instance
+	- Run `gcloud compute instances delete lesson02-securehost -q` to delete instance
 	- Run `gcloud compute instances list` to make sure you have no running instances
