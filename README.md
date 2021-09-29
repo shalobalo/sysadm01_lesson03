@@ -19,20 +19,27 @@ gcloud alpha billing accounts projects link $(gcloud projects list --format="jso
 	- Run `gcloud services enable compute.googleapis.com` to enable compute API. (it may take few minutes to complete)
 11. Create and upload ssh keys
 	- Run `ssh-keygen -b 4096` keep path to key file default example:`/home/andy/.ssh/id_rsa`, keep passphrase empty (press enter two times)
+	> NOTE: The public key has a SINGLE LINE with format `Type Base64key User@Host`
+	> `Type` is usually `ssh-rsa` but could be `ssh-dsa`
+	> `Base64key` is a line with ASCI characters WITHOUT SPACES
+	> `User` Active User at the moment key created
+	> `Host` Hostname where the key created
+
 	- Run command `echo $USER` to see system username
 	> Example: 
 	```
 	% echo $USER
 	andy
 	```
-	- Use *nano* or *vi* to edit `~/.ssh/id_rsa.pub` file and change format to: `username:ssh-rsa [EXISTING_KEY_VALUE_2] username`
+	- Use *nano* or *vi* to edit `~/.ssh/id_rsa.pub` file and change format to: `username:ssh-rsa [EXISTING_KEY_VALUE_] username`
+	> Note: you have to replace `user@host` at the end of the line with the username from previous step. 
+	> Remember key doens't contain any spaces and usually ends with one or two equal signs
 	> Example: 
-	```
-	andy:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC+pUaWa/4wcsS5fmaYB0QNPB0mHpxVPioUtpWGaKko1ajZ76Cji+xFIcXofxsdTxFuczH188SYCDQsmZTtygDK4yQS0fsxQ336uFkMPgt7XYy66Hw+ZB+2liSV8NWq0fXObTMWyb0/l29Oilbw7bQtPtagAqrWWgigwgv1qOKKEAQx8R7Eluynid5QX+M1bBv53tlsbOwEXluPJ4Uhq1g7Rh3OTo2pVdcmnbYMZ+hio8q5W9MFC6VyHoOq7ZbCkzgIztmKhTcBYOlsOKYCzI2xF2vmf0Qx9MqxeyDG8QmyiW0nXXO80Xgmu96eYzsGDdSK2ORiGT8ikO1XZmBv5b+x andy
-	```
+	`
+	andy:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDIpTEWgpgRUGV2MsY5njK5BdqZMDrLw1+bcfZuhoHitm5FA1gEN1CoIHmTRfIQGv2nVSaUL+9ZvYyuclVgWhkJ+uaOYjtHscz3ITwHoBuaxY5Yz3YhS4kBt8Ky2UwO8+yUTFo7jTVFCia/VR6v9C3YDmGDwMxhfKAZ4DDO6eCGiHdoOcH7TKT3YCvHX3C3aOC4hZuq7vsdLRZNhNw+0twULqiKUf7MVUcBd8MSkiln4oTcP3q4xaTIiKMBYr+KJ6A4KIx+DVYwbYMSlbCGX1y08XRwAJ1ZmxqsMFX1IGs/ueD3de1PyabjRhr+us1GXHNbQLQlk2Vn+iFjR7btL0K8kwbiuM/IVbeY2odam9XHbhLqY/4J2HXhujwT0lJ3LUGCjTR8XeP3XA7hndIr9T9v+rOZMMDKllCtAK3goSq5EEJZgeN+YbtAhSpyPgMlHFUiYWonUAJWzQJkjfsgYh2y6t9eSRZ1fvqhopsHj/pBF8UnW8S0xSC0lWkVWV83YKe7E7T9oHfqTBhMEas++bcXaePqmGd7+fD5S4CojZ+gV9Hqt4RzQUPTZWC8SDyGXjL9AP+XS7QR320zYRMVx4iIiSndKY5O7XM/9ObqlV0RkT4yFwMjUmEE9NUqHNJn2WhBEe0F23KfRkOFEmcVICKfgLrwEBtpwci8EOyuLM0zbQ== andy
+	`
+	- Make sure the key is have proper format now: `cat $HOME/.ssh/id_rsa.pub`
 	- Run `gcloud compute project-info add-metadata --metadata-from-file ssh-keys="$HOME/.ssh/id_rsa.pub"` to add public key to GCP platform
-	- `cat $HOME/.ssh/id_rsa.pub`
-
 	> ATTENTION!
 	> IT'S TIME TO TAKE A SCREENSHOT:  Make sure the screenshot contains google cloud shell log 
 
