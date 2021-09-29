@@ -19,11 +19,16 @@ gcloud alpha billing accounts projects link $(gcloud projects list --format="jso
 	- Run `gcloud services enable compute.googleapis.com` to enable compute API. (it may take few minutes to complete)
 11. Create and upload ssh keys
 	- Run `ssh-keygen -b 4096` keep path to key file default example:`/home/andy/.ssh/id_rsa`, keep passphrase empty (press enter two times)
+	- Do not share you private `~/.ssh/id_rsa` file. It's secret, like a password.
+	- Public part of the key is generated and saved along with private and has .pub extention: `~/.ssh/id_rsa.pub`
+	- Run `cat ~/.ssh/id_rsa` to see public file.
+
 	> NOTE: The public key has a SINGLE LINE with format `Type Base64key User@Host`
-	- *Type* is ssh usualkey type. There are many types but most common are `ssh-rsa` or `ssh-dsa`
-	- *Base64key* is a line with ASCI characters WITHOUT SPACES
-	- *User* Active User at the moment key created
-	- *Host* Hostname where the key created
+	- *Type:* is ssh usualkey type. There are many types but most common are `ssh-rsa` or `ssh-dsa`
+	- *Base64key:* is a line with ASCI characters WITHOUT SPACES
+	- *User:* Active User at the moment key created
+	- *Host:* Hostname where the key created
+
 
 	- Run command `echo $USER` to see system username
 	> Example: 
