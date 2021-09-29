@@ -29,7 +29,9 @@ gcloud alpha billing accounts projects link $(gcloud projects list --format="jso
 	> NOTE: Do not share you private key file `$HOME/.ssh/id_rsa`. Keep it secret like a password.
 	- Public part of the key is generated and saved along with private and has **.pub** extention: `$HOME/.ssh/id_rsa.pub`
 	- Run `cat ~/.ssh/id_rsa.pub` to see public key file.
+	
 	> Example: `ssh-rsa AAAAB3Nza...l0MWKZfQ== andy`
+	
 	> Public key has SINGLE LINE with format `<algorithm> <key> <comment>`
 
 	> **algorithm**: [SSH key format](https://en.wikipedia.org/wiki/Ssh-keygen#Key_formats_supported)
