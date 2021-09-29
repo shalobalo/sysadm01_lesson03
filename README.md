@@ -34,9 +34,13 @@ gcloud alpha billing accounts projects link $(gcloud projects list --format="jso
 	ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCu7kGuW5I5vbWTAuGI6V9uFlZ164yECf6XUXCoNE8kSvIKSMwhut6l+2UZFf6pAftz7iSPrZUXjTWr27ksraW+2bqn5u8PMHAyYFiPxr0WbOn/c1oEyhRuS+090VPfIGq5dz19CRxn2A+zXCZhfwDWT71PzuWqwI6VfaRBIlLietJSa9Pfd80jZziBPQKd4U6Oz5zHyX/9QHiGsgalrZXvazE3LD9Cc+jhXlf65RsQZ/mg7GKS4NAM+zz8ymgF8epmNhwgw0U68yH4O4bhih3kHBd7eRgRqbAWQbh2hXvkhrdANPcuQDH3rz1j2e+uoJ6w48RKpq4hB5vqw+Pcn/bDpc5m4ESU5j1fsYhzFQv+9aLznhUg3lLjPV1Fq7DK24JclJk6YGoPUGDcihW+19De5PkpVncOY8w/mkchzweEiw/sQpQF8nNvG9FpbG1n+9OxhipiiW2wCOHaHLREoBctx01A7Cq/0fTFFrqDn871qBXoEjS/qP7NlXtvLBcn3VJEQw1kBYn0WRsrIb2HwLKDbzMFvH3OZoM/U66s5h6YnNZoYjs1IDcaf0B/PdZsqVtDtME3ZkqMcX72/rDqH+O8xWe/K0EBOJ/DzMRfALRePnkvLUlp8J9IU+v6D3/ExJaCMKOTLj7hf+CASclRc0VOB2P9lL6vmQyE1rl0MWKZfQ== andy
 	```
 	> Public key has SINGLE LINE with format `Type Base64key User@Host`
+
 	> **Type**: is ssh usualkey type. There are many types but most common are `ssh-rsa` or `ssh-dsa`
+
 	> **Base64key**: is a line with ASCI characters WITHOUT SPACES
+	
 	> **User**: Active User at the moment key created
+	
 	> **Host**: Hostname where the key created
 
 	- Gcloud is support only specific format of public key: **username:ssh-rsa [EXISTING_KEY_VALUE] username**
