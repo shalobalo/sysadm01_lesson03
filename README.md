@@ -20,10 +20,10 @@ gcloud alpha billing accounts projects link $(gcloud projects list --format="jso
 11. Create and upload ssh keys
 	- Run `ssh-keygen -b 4096` keep path to key file default example:`/home/andy/.ssh/id_rsa`, keep passphrase empty (press enter two times)
 	> NOTE: The public key has a SINGLE LINE with format `Type Base64key User@Host`
-	- `Type` is usually `ssh-rsa` but could be `ssh-dsa`
-	- `Base64key` is a line with ASCI characters WITHOUT SPACES
-	- `User` Active User at the moment key created
-	- `Host` Hostname where the key created
+	- *Type* is ssh usualkey type. There are many types but most common are `ssh-rsa` or `ssh-dsa`
+	- *Base64key* is a line with ASCI characters WITHOUT SPACES
+	- *User* Active User at the moment key created
+	- *Host* Hostname where the key created
 
 	- Run command `echo $USER` to see system username
 	> Example: 
@@ -75,6 +75,10 @@ gcloud alpha billing accounts projects link $(gcloud projects list --format="jso
 
 	- Get remote shell to secured instance: `ssh lesson02-securehost`
 	- Run `hostname` to make sure you are on the secured host.
+	- Run `exit` to close `lesson02-securehost`
+	- Run `exit` to close `lesson02-jumphost`
+	- Make sure you get back to cloudshell instance and your prompt line looks like this: `andy@cloudshell:~ (syseng01-10246)`
+	- Run `gcloud compute instanes list`
 
 	> ATTENTION!
 	> IT'S TIME TO TAKE A SCREENSHOT:  Make sure the screenshot contains google cloud shell log with ssh session to 'lesson02-securehost'
