@@ -10,13 +10,17 @@
 ```
 if gcloud projects list --format="json"|jq -r '.[].name'|grep -q "syseng01-" ;then echo "Project exists!"; else gcloud projects create syseng01-$(echo $((10000 + $RANDOM % 99999)));fi
 ```
-5. Run `gcloud projects list` find new project. Make sure you have only one project that name fits in to `syseng01-*` format.
-6. Switch to *sysaeng01-* project: 
+5. Run `gcloud projects list` to see list of available projects. Make sure you have only one project that name fits in to `syseng01-*` format.
+6. Switch to *sysaeng01-* project using command: 
 ```
 gcloud config set project $(gcloud projects list --format="json"|jq -r '.[] | select(.name | contains("syseng01-")) | .name')
 ```
-
+	> NOTE: After step 7 your prompt line should looks like: `andy@cloudshell:~ (syseng01-10246)`. Repeat previous steps if you see something other than `syseng01-` in that line.
+	
 7. Set Default zone: `gcloud config set compute/zone us-central1-a`
+
+	> IMPORTANT! If you have GCP web page reloaded or shell console reset you have to repeat steps 6 and 7
+
 8. Run `gcloud alpha billing accounts list` to see billing_account_id
 9. To enable billing on the new project run: 
 ```
