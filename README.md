@@ -1,5 +1,5 @@
 
-# Lesson 2. Home Work. Practice
+# Lesson 3. Home Work. Practice
 ### GCP Account Setup:
 1. Create a Gmail account if you don’t have one: https://accounts.google.com/signup
 2. Sign up for free trial at Google cloud platform: https://cloud.google.com
@@ -48,15 +48,15 @@
 
 ### Practice on Jumphost:
 12. Create Jump Instance and get remote shell
-	- Run `gcloud compute instances create lesson02-jumphost` to create new instance
- 	- To get remote shell to the Instance run: `ssh $(gcloud compute instances describe lesson02-jumphost --format='get(networkInterfaces[0].accessConfigs[0].natIP)')`
+	- Run `gcloud compute instances create lesson03-jumphost` to create new instance
+ 	- To get remote shell to the Instance run: `ssh $(gcloud compute instances describe lesson03-jumphost --format='get(networkInterfaces[0].accessConfigs[0].natIP)')`
 
-	> IMPORTANT! You should see shell prompt changed to `[andy@lesson02-jumphost ~]$ ` which indicates you are connected to remote host
+	> IMPORTANT! You should see shell prompt changed to `[andy@lesson03-jumphost ~]$ ` which indicates you are connected to remote host
 
 13. List of all files in current directory
   - Run `ls -la` to see all files in current directory
 14. Create file using touch command
-  - Run `touch lesson02`
+  - Run `touch lesson03`
   - Make sure file is created and you can see it in the `ls -la` output
 15. Print all process list
   - Run `ps axu` to see all processes running
@@ -67,23 +67,23 @@
 
 	> IT'S TIME TO TAKE A SCREENSHOT:  Make sure the screenshot contains at least 10 lines of google cloud shell log
 
-  - Run `exit` to close connection with `lesson02-jumphost`
+  - Run `exit` to close connection with `lesson03-jumphost`
   - Make sure you get back to cloudshell instance and your prompt line looks like this: `andy@cloudshell:~ (syseng01-10246)`
 
 ### Practice on Secured host:
 18. Create secured instance and get shell access to it
-	- Run `gcloud compute instances create lesson02-securehost --no-address` to create secured instance
+	- Run `gcloud compute instances create lesson03-securehost --no-address` to create secured instance
 	- Start ssh-agent on cloud shell instance: `eval $(ssh-agent -s)`
 	- Add private key to agent `ssh-add ~/.ssh/id_rsa`
-	- Ssh option **-A** will enable ssh-agent and your private key available on `lesson02-jumphost`
-	- To connect to the instance run: `ssh -A $(gcloud compute instances describe lesson02-jumphost --format='get(networkInterfaces[0].accessConfigs[0].natIP)')`
+	- Ssh option **-A** will enable ssh-agent and your private key available on `lesson03-jumphost`
+	- To connect to the instance run: `ssh -A $(gcloud compute instances describe lesson03-jumphost --format='get(networkInterfaces[0].accessConfigs[0].natIP)')`
 	- Check if ssh-agent has key run `ssh-add -l`
-	- Get remote shell to secured instance: `ssh lesson02-securehost`
+	- Get remote shell to secured instance: `ssh lesson03-securehost`
 	- Run `hostname` to make sure you are on the secured host.
-	- Run `exit` to close ssh session with `lesson02-securehost`
-	- Run `exit` to close ssh session with `lesson02-jumphost`
+	- Run `exit` to close ssh session with `lesson03-securehost`
+	- Run `exit` to close ssh session with `lesson03-jumphost`
 
-	> IT'S TIME TO TAKE A SCREENSHOT:  Make sure the screenshot contains at least 10 lines od google cloud shell log with ssh session to 'lesson02-securehost'
+	> IT'S TIME TO TAKE A SCREENSHOT:  Make sure the screenshot contains at least 10 lines od google cloud shell log with ssh session to 'lesson03-securehost'
 
 	- Make sure you get back to cloudshell instance and your prompt line looks like this: `andy@cloudshell:~ (syseng01-10246)`
 	- Run `gcloud compute instances list`
@@ -94,6 +94,6 @@
 	- Check billing expenses
 
 21. Terminate VMs
-	- Run `gcloud compute instances delete lesson02-jumphost -q` to delete instance
-	- Run `gcloud compute instances delete lesson02-securehost -q` to delete instance
+	- Run `gcloud compute instances delete lesson03-jumphost -q` to delete instance
+	- Run `gcloud compute instances delete lesson03-securehost -q` to delete instance
 	- Run `gcloud compute instances list` to make sure you have no running instances
